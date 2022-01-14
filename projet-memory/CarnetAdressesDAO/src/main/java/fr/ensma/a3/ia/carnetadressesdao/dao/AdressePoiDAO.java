@@ -67,6 +67,9 @@ public class AdressePoiDAO extends AbstractPoiDAO<AdresseEntity>{
 
 	@Override
 	public List<AdresseEntity> getAll() {
+		
+		//System.out.println("getAll");
+		
 		XSSFWorkbook bdd = openBase();
 		Sheet tableadr = bdd.getSheet("Adresses");
 		ArrayList<AdresseEntity> listeadr = new ArrayList<AdresseEntity>();

@@ -8,13 +8,26 @@ public class Adresse
 	private int codePostal;
 	
 	
-	
-	
+	@Override
+	public String toString() {
+		return "Adresse [numRue=" + numRue + ", nomRue=" + nomRue + ", nomVille=" + nomVille + ", codePostal="
+				+ codePostal + "]";
+	}
 	/**
 	 * @return the numRue
 	 */
 	public int getNumRue() {
 		return numRue;
+	}
+	public Adresse() {
+		super();
+	}
+	public Adresse(int numRue, String nomRue, String nomVille, int codePostal) {
+		super();
+		this.numRue = numRue;
+		this.nomRue = nomRue;
+		this.nomVille = nomVille;
+		this.codePostal = codePostal;
 	}
 	/**
 	 * @param numRue the numRue to set

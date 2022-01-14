@@ -58,6 +58,11 @@ public class Personne
 	public void setAdr(Adresse adr) {
 		this.adr = adr;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Personne [nom=" + nom + ", prenom=" + prenom + ", adr=" + adr.toString() + "]";
+	}
+
 	
 }

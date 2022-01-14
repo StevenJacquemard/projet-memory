@@ -6,7 +6,7 @@ import fr.ensma.a3.ia.carnetadressesdao.api.Mediateur;
 
 public class Carnet 
 {
-	Mediateur api =new Mediateur();
+	static Mediateur api =new Mediateur();
 
 	public Carnet() 
 	{
@@ -22,7 +22,7 @@ public class Carnet
 		return api.getAllPersonnes();
 	}
 	
-	public Personne ContactParNom(String n)
+	public Personne contactParNom(String n)
 	{
 		return api.getContactByName(n);
 	}

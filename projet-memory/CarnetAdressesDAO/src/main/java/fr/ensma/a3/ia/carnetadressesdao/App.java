@@ -3,6 +3,9 @@ package fr.ensma.a3.ia.carnetadressesdao;
 import java.util.List;
 import java.util.Optional;
 
+import fr.ensma.a3.ia.carnetadressesdao.carnet.Adresse;
+import fr.ensma.a3.ia.carnetadressesdao.carnet.Carnet;
+import fr.ensma.a3.ia.carnetadressesdao.carnet.Personne;
 import fr.ensma.a3.ia.carnetadressesdao.dao.AdressePoiDAO;
 import fr.ensma.a3.ia.carnetadressesdao.dao.IDao;
 import fr.ensma.a3.ia.carnetadressesdao.dao.PersonnePoiDAO;
@@ -17,7 +20,22 @@ public class App
 {
     public static void main( String[] args )
     {
-    	System.out.println("-------------------------------");
+    	Carnet ca = new Carnet();
+    	
+    	//ca.nouveauContact("Thomas", "Pissos", new Adresse(2, "rue de la biere","Chassou",85677));
+    	
+    	
+    	
+    	for(Personne pers : ca.toutLesContacts()) {
+    		System.out.println(pers.toString());
+    	}
+    }
+}
+
+
+
+/*
+ System.out.println("-------------------------------");
     	System.out.println("Elements dans la base adresse :");
     	IDao<AdresseEntity> adrdao = new AdressePoiDAO();
     	List<AdresseEntity> alladr = adrdao.getAll();
@@ -121,6 +139,4 @@ public class App
     	for(PersonneEntity pers : allpers) {
     		System.out.println(pers);
     	}
-    	
-    }
-}
+*/

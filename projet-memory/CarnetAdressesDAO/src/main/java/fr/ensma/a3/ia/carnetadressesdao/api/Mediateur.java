@@ -16,7 +16,11 @@ public class Mediateur
 	IDao<AdresseEntity> adrdao = new AdressePoiDAO();
 	IDao<PersonneEntity> persdao = new PersonnePoiDAO();
 	
-
+	public Mediateur()
+	{
+		
+	}
+	
 	public ArrayList<Personne> getAllPersonnes() 
 	{
 		ArrayList<Personne> personnages = new ArrayList<Personne>();
@@ -24,15 +28,17 @@ public class Mediateur
 		List<PersonneEntity> allpers = persdao.getAll();
     	List<AdresseEntity> alladr = adrdao.getAll();
     	
-    	Personne p = new Personne();
-    	Adresse a = new Adresse();
     	
     	for(PersonneEntity pers : allpers) 
     	{
     		for(AdresseEntity adr : alladr)
     		{
+  			
     			if (pers.getIdAdr()== adr.getIdAdr())
     			{
+    		    	Personne p = new Personne();
+    		    	Adresse a = new Adresse();
+    				
     				a.setNumRue(adr.getNumRue());
     				a.setNomRue(adr.getNomRue());
     				a.setNomVille(adr.getNomVille());
@@ -43,6 +49,7 @@ public class Mediateur
     				p.setAdr(a);
     				
     				personnages.add(p);
+    				
     			}
     		}
     	}
@@ -68,17 +75,20 @@ public class Mediateur
 	    	persdao.create(pers);
 	}
 
-	public ArrayList<Personne> getAllContact() {
-		
-		
-		return null;
-		// TODO Auto-generated method stub
-		
-	}
 
-	public Personne getContactByName(String n) {
-		// TODO Auto-generated method stub
-		return null;
+	public Personne getContactByName(String n) 
+	{
+		//Fonctionne pas encore
+		for(Personne pers : this.getAllPersonnes())
+			{
+			System.out.println(pers.getNom().equals(n));
+				if (pers.getNom().equals(n))
+				{
+					pers.toString();
+					return pers;
+				}
+			};
+			return null;
 	}
 
 }
