@@ -22,7 +22,9 @@ public class App
     {
     	Carnet ca = new Carnet();
     	
-    	//ca.nouveauContact("Thomas", "Pissos", new Adresse(2, "rue de la biere","Chassou",85677));
+    	ca.nouveauContact("Elie", "Tricoire", new Adresse(3, "rue de la biere","Chassou",85677));
+    	
+    	ca.supprimerContact(ca.contactParNom("Trie"));
     	
     	
     	

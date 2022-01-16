@@ -2,6 +2,8 @@ package fr.ensma.a3.ia.carnetadressesdao.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import fr.ensma.a3.ia.carnetadressesdao.carnet.Adresse;
 import fr.ensma.a3.ia.carnetadressesdao.carnet.Personne;
@@ -10,16 +12,14 @@ import fr.ensma.a3.ia.carnetadressesdao.dao.IDao;
 import fr.ensma.a3.ia.carnetadressesdao.dao.PersonnePoiDAO;
 import fr.ensma.a3.ia.carnetadressesdao.dao.entity.AdresseEntity;
 import fr.ensma.a3.ia.carnetadressesdao.dao.entity.PersonneEntity;
+import fr.ensma.a3.ia.carnetadressesdao.dao.exceptions.MissingElementException;
 
 public class Mediateur 
 {
+	private static Logger LOGGER = Logger.getLogger("Media");
+	
 	IDao<AdresseEntity> adrdao = new AdressePoiDAO();
 	IDao<PersonneEntity> persdao = new PersonnePoiDAO();
-	
-	public Mediateur()
-	{
-		
-	}
 	
 	public ArrayList<Personne> getAllPersonnes() 
 	{
@@ -27,7 +27,6 @@ public class Mediateur
 		
 		List<PersonneEntity> allpers = persdao.getAll();
     	List<AdresseEntity> alladr = adrdao.getAll();
-    	
     	
     	for(PersonneEntity pers : allpers) 
     	{
@@ -78,19 +77,55 @@ public class Mediateur
 
 	public Personne getContactByName(String n) 
 	{
-		//Fonctionne pas encore
 		for(Personne pers : this.getAllPersonnes())
 			{
 			System.out.println(pers.getNom().equals(n));
 				if (pers.getNom().equals(n))
 				{
-					pers.toString();
 					return pers;
 				}
 			};
-			return null;
+			LOGGER.log(Level.INFO,"Element absent de la base ...");
+			throw new MissingElementException();
 	}
-
+	
+	public void removePersonne(Personne p) 
+	{
+		
+		List<PersonneEntity> allpers = persdao.getAll();
+    	List<AdresseEntity> alladr = adrdao.getAll();
+	    	
+	    	for(PersonneEntity pers : allpers) 
+	    	{
+	    		for(AdresseEntity adr : alladr)
+	    		{
+	  			
+	    			if (pers.getIdAdr()== adr.getIdAdr() && isEqual(pers, adr, p))
+	    			{
+	    				adrdao.delete(adr);
+	    				persdao.delete(pers);
+    				}
+	    		}
+	    	}	    	
+	}
+	
+	private boolean isEqual(PersonneEntity pers, AdresseEntity adr, Personne p)
+	{
+		if(		p.getNom().equals(pers.getNom()) &&
+				p.getPrenom().equals(pers.getPrenom()) &&
+				p.getAdr().getNumRue()==adr.getNumRue() &&
+				p.getAdr().getNomRue().equals(adr.getNomRue()) &&
+				p.getAdr().getNomVille().equals(adr.getNomVille()) &&
+				p.getAdr().getNumRue()==adr.getNumRue()
+		  )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}		
+	}
 }
 
 

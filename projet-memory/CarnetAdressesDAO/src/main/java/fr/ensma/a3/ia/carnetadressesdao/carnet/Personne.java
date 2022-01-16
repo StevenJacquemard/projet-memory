@@ -10,7 +10,7 @@ public class Personne
 	private String prenom;
 	private Adresse adr;
 	
-	public Personne (String n, String p, Adresse ad)
+	public Personne (String p, String n, Adresse ad)
 	{
 		nom = n;
 		prenom = p;

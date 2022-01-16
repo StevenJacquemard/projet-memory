@@ -27,6 +27,10 @@ public class Carnet
 		return api.getContactByName(n);
 	}
 	
+	public void supprimerContact(Personne p)
+	{
+		api.removePersonne(p);
+	}
 	
 	
 }
